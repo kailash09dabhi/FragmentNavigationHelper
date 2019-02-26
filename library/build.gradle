@@ -1,0 +1,45 @@
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion 28
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+publish {
+  def groupProjectID = 'com.kailashdabhi'
+  def artifactProjectID = 'fragment-navigation-helper'
+  def publishVersionID = '0.1.2'
+  userOrg = 'kailash09dabhi'
+  repoName = 'maven'
+  groupId = groupProjectID
+  artifactId = artifactProjectID
+  publishVersion = publishVersionID
+  desc = 'A simple library to help doing fragment navigation with less code.'
+  website = 'https://github.com/kailash09dabhi/FragmentNavigationHelper'
+}
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation 'androidx.appcompat:appcompat:1.0.2'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'androidx.test:runner:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
