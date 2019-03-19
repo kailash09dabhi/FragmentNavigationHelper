@@ -27,7 +27,7 @@ android {
 publish {
   def groupProjectID = 'com.kailashdabhi'
   def artifactProjectID = 'fragment-navigation-helper'
-  def publishVersionID = '0.1.3'
+  def publishVersionID = '0.2.0'
   userOrg = 'kailash09dabhi'
   repoName = 'maven'
   groupId = groupProjectID
