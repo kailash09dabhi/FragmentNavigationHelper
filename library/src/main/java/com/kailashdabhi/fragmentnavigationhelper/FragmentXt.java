@@ -22,6 +22,17 @@ public final class FragmentXt {
     return false;
   }
 
+  static int backStackEntryCountOf(String fragment, FragmentManager manager) {
+    int backStackCount = manager.getBackStackEntryCount();
+    int count = 0;
+    for (int i = 0; i < backStackCount; i++) {
+      if (manager.getBackStackEntryAt(i).getName().contains(fragment)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
   public static void navigate(Fragment fragment, FragmentManager manager,
       Block<FragmentTx.Builder> block) {
     FragmentTx.Builder builder = new FragmentTx.Builder(manager, fragment)

@@ -34,7 +34,12 @@ public final class FragmentTx {
 
   private void addToBackStack(FragmentTransaction transaction) {
     if (addToBackStack) {
-      transaction.addToBackStack(fragment.getClass().getName());
+      int count = FragmentXt.backStackEntryCountOf(fragment.getClass().getName(), manager);
+      if (count == 0) {
+        transaction.addToBackStack(fragment.getClass().getName());
+      } else {
+        transaction.addToBackStack(fragment.getClass().getName() + ++count);
+      }
     }
   }
 
