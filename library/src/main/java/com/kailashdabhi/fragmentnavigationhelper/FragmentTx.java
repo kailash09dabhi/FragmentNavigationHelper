@@ -26,28 +26,26 @@ public final class FragmentTx {
 
   void execute() {
     FragmentTransaction transaction = manager.beginTransaction();
-    addToBackStack(transaction);
+    int count = FragmentXt.backStackEntryCountOf(fragment.getClass().getName(), manager);
+    String tag =
+        count == 0 ? fragment.getClass().getName() : fragment.getClass().getName() + ++count;
+    addToBackStack(transaction, tag);
     setAnimation(transaction);
-    setTransaction(transaction);
+    setTransaction(transaction, tag);
     transaction.commit();
   }
 
-  private void addToBackStack(FragmentTransaction transaction) {
+  private void addToBackStack(FragmentTransaction transaction, String tag) {
     if (addToBackStack) {
-      int count = FragmentXt.backStackEntryCountOf(fragment.getClass().getName(), manager);
-      if (count == 0) {
-        transaction.addToBackStack(fragment.getClass().getName());
-      } else {
-        transaction.addToBackStack(fragment.getClass().getName() + ++count);
-      }
+      transaction.addToBackStack(tag);
     }
   }
 
-  private void setTransaction(FragmentTransaction transaction) {
+  private void setTransaction(FragmentTransaction transaction, String tag) {
     if (type == Type.REPLACE) {
-      transaction.replace(R.id.fragment_container, fragment, fragment.getClass().getName());
+      transaction.replace(R.id.fragment_container, fragment, tag);
     } else if (type == Type.ADD) {
-      transaction.add(R.id.fragment_container, fragment, fragment.getClass().getName());
+      transaction.add(R.id.fragment_container, fragment, tag);
     }
   }
 
